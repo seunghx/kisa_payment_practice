@@ -40,6 +40,9 @@ app.post('/join', function(req, res){
       });    
 })
 
+//199003328057724253012100 계좌번호
+
+
 app.get('/user',function(req, res){
     var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
     var requestURL = "https://testapi.open-platform.or.kr/user/me?user_seq_no=1100034736";
@@ -54,6 +57,49 @@ app.get('/user',function(req, res){
         res.send(body);
     })
 })
+
+app.get('/balance',function(req, res){
+    var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
+    var requestURL = "https://testapi.open-platform.or.kr/v1.0/account/balance?fintech_use_num=199003328057724253012100&tran_dtime=20190307101010";
+    var option = {
+        method : "GET",
+        url : requestURL,
+        headers : {
+            "Authorization" : "Bearer " + accessToken
+        }
+    }
+    request(option, function(err, response, body){
+        var data = JSON.parse(body);
+
+        res.json(data);
+    })
+})
+
+app.get('/list',function(req, res){
+    var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
+    var requestURL = "https://testapi.open-platform.or.kr/v1.0/account/transaction_list";
+    var qs = 
+    "?fintech_use_num=199003328057724253012100" +
+    "&inquiry_type=A"+
+    "&from_date=20160101"+
+    "&to_date=20160101"+
+    "&sort_order=A"+
+    "&page_index=00001"+
+    "&tran_dtime=20190307101010"
+
+    var option = {
+        method : "GET",
+        url : requestURL+qs,
+        headers : {
+            "Authorization" : "Bearer " + accessToken
+        }
+    }
+    request(option, function(err, response, body){
+        var data = JSON.parse(body);
+        res.json(data);
+    })
+})
+
 
 app.get('/authResult', function(req, res){
     var auth_code = req.query.code
