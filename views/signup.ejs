@@ -214,21 +214,30 @@
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script>
     $("#authButton").click(function(){
+        invokeAuth();
+    })
+
+    function invokeAuth(){
         var qs = 
         "?response_type=code&"
         + "client_id=l7xx5f2432095adb49f9a8d05adf9dc09f9b&"
-        + "redirect_url=http://localhost:3000/authResult&"
-        + "scope=login transfer&"
+        + "redirect_uri=http://localhost:3000/authResult&"
+        + "scope=login inquiry transfer&"
         + "auth_type=0&"
         + "invoke_type=ajax"
-        $.ajax({
+        console.log(qs);
+        $.ajax({ 
             url : "https://testapi.open-platform.or.kr/oauth/2.0/authorize2"+qs,
-            type : "get",                        
+            type : "get",
+            data : {}                        
         }).done(function(result){
             window.name ="parents";
-            console.log(result)
+            console.log(result.location);
+
             var tmpwindow = window.open("about:blank");
+            tmpwindow.location = result.location;//추가
         })
-    })
+
+    }
 </script>
 </body>
