@@ -32,10 +32,12 @@ app.get('/authResult', function(req, res){
             grant_type : "authorization_code"
         }
     };
-    request(option, function(err, res, body){
+    request(option, function(err, response, body){
         if(err) throw err;
         else {
             console.log(body);
+            var accessRequestResult = JSON.parse(body);
+            res.render('resultChild', {data : accessRequestResult});
         }
     })
     console.log(auth_code);
