@@ -52,8 +52,9 @@ app.post('/login', function(req, res){
             else {
                 var userData = result;
                 console.log("login");
-                conn.release();
                 res.json(userData);
+                conn.release();
+
             }
         })
     })
@@ -86,9 +87,14 @@ app.post('/user',function(req, res){
     })
 })
 
-app.get('/balance',function(req, res){
-    var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
-    var requestURL = "https://testapi.open-platform.or.kr/v1.0/account/balance?fintech_use_num=199003328057724253012100&tran_dtime=20190307101010";
+app.get('/amount', function(err, res){
+    res.render('amount');
+})
+
+app.post('/balance',function(req, res){
+    var accessToken = req.body.accessToken;
+    var finusenum = req.body.finusenum;
+    var requestURL = "https://testapi.open-platform.or.kr/v1.0/account/balance?fintech_use_num="+finusenum+"&tran_dtime=20190307101010";
     var option = {
         method : "GET",
         url : requestURL,
@@ -98,7 +104,6 @@ app.get('/balance',function(req, res){
     }
     request(option, function(err, response, body){
         var data = JSON.parse(body);
-
         res.json(data);
     })
 })

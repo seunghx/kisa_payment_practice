@@ -212,8 +212,8 @@
             success : function(data){
                 console.log("login");
                 console.log(data);
-                localStorage.setItem("accessToken", data.accessToken);
-                localStorage.setItem("useseqnum", data.useseqnum);
+                localStorage.setItem("accessToken", data[0].accessToken);
+                localStorage.setItem("useseqnum", data[0].useseqnum);
             } 
         });                       
     }
