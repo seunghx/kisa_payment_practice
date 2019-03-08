@@ -108,6 +108,72 @@ app.post('/balance',function(req, res){
     })
 })
 
+app.post('/withdraw', function(req, res){
+    var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
+    var getTokenUrl = "https://testapi.open-platform.or.kr/v1.0/transfer/withdraw";
+    var option = {
+        method : "POST",
+        url :getTokenUrl,
+        headers : {
+            "Content-Type" : "application/json; charset=UTF-8",
+            "Authorization" : "Bearer " + accessToken
+        },
+        json : {
+            dps_print_content : "쇼핑몰환불",
+            fintech_use_num : '199003328057724253012100',
+            tran_amt : '1000',
+            tran_dtime : '20190308142251',
+            cms_no : "123451234123"
+        }
+    };
+    request(option, function(err, response, body){
+        if(err) throw err;
+        else {
+            console.log(body);
+            var withdrawResult = (body);
+            res.send(withdrawResult);
+        }
+    })
+})
+
+app.get('/qrcode', function(req, res){
+    res.render('qrcode');
+})
+
+app.get('/qrreader', function(req, res){
+    res.render('qrreader');
+})
+
+app.post('/deposit', function(req, res){
+    var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
+    var getTokenUrl = "https://testapi.open-platform.or.kr/v1.0/transfer/deposit";
+    var option = {
+        method : "POST",
+        url :getTokenUrl,
+        headers : {
+            "Content-Type" : "application/json; charset=UTF-8",
+            "Authorization" : "Bearer " + accessToken
+        },
+        json : {
+            wd_print_content : "쇼핑몰환불",
+            req_cnt : '199003328057724253012100',
+            req_list : {
+
+            }
+        }
+    };
+    request(option, function(err, response, body){
+        if(err) throw err;
+        else {
+            console.log(body);
+            var withdrawResult = (body);
+            res.send(withdrawResult);
+        }
+    })
+})
+
+
+
 app.get('/list',function(req, res){
     var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
     var requestURL = "https://testapi.open-platform.or.kr/v1.0/account/transaction_list";
