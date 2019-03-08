@@ -53,7 +53,7 @@ app.post('/login', function(req, res){
                 var userData = result;
                 console.log("login");
                 conn.release();
-                res.json(userData.accessToken);
+                res.json(userData);
             }
         })
     })
@@ -62,6 +62,8 @@ app.post('/login', function(req, res){
 app.get("/login", function(req, res){
     res.render('login');
 })
+
+
 
 app.get("/home", function(req, res){
     res.render('home');

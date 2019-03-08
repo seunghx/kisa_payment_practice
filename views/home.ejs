@@ -236,8 +236,8 @@
         for(var i= 0; i < list.length; i++){
             var element = list[i];
             $("#cardList").append(
-                '<a href="" class="default-link button button-m shadow-huge button-round-large bottom-30 button-full button-margins bg-highlight">'+element.account_alias+'</a>'
-            );
+                '<a href="/ammount?finusenum='+element.fintech_use_num+'" class="default-link button button-m shadow-huge button-round-large bottom-30 button-full button-margins bg-highlight">'+element.account_alias+'</a>'
+            );  
         }
     }
     </script>

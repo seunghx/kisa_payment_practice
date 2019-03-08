@@ -201,6 +201,7 @@
     function login(){
         var username = $("#userId").val();
         var userpassword = $("#userPassword").val();
+        console.log(username, userpassword);
         $.ajax({ 
             url : "/login",
             type : "POST",
