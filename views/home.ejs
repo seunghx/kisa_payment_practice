@@ -37,16 +37,7 @@
     <div class="page-content header-clear-medium">   
             
                 
-        <div class="content-boxed">
-            <div class="content">
-                <h1 class="bolder">Kisa pay 시작 페이지입니다.</h1>
-                <p>
-                    This is an empty page, containing all elements you need to to create more pages. Check the documentation files, and copy & paste your features into this page, then save it and so on. 
-                    <br><br>
-                    If you run into any issues, let us know and we'll gladly assist.
-                </p>
-            </div>    
-        </div>
+
         <div id="cardList">
 
         </div>        
@@ -247,7 +238,13 @@
         var list = data.res_list;
         for(var i= 0; i < list.length; i++){
             var element = list[i];
-            $("#cardList").append(element.fintech_use_num);
+            $("#cardList").append(
+                + '<div class="content-boxed">'
+                + '<div class="content">'
+                + '<h1 class="bolder">'+element.account_alias+'</h1>'
+                + '</div>'    
+                +'</div>'
+            );
         }
     }
     </script>
