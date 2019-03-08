@@ -4,7 +4,8 @@ var request = require('request');
 var path = require('path');
 var mysql = require('mysql');
 var mysql      = require('mysql');
-var connection = mysql.createConnection({
+var connectionPool = mysql.createPool({
+  connectionLimit : 5,
   host     : 'localhost',
   user     : 'root',
   password : 'q1w2e3r4',
@@ -22,8 +23,7 @@ app.use(express.static('public'));
 app.get('/index', function(req, res){
     res.render('home');
 })
-connection.connect();
- 
+
 app.post('/join', function(req, res){
     var name = req.body.name;
     var password = req.body.password;
@@ -42,6 +42,28 @@ app.post('/join', function(req, res){
 
 //199003328057724253012100 계좌번호
 
+app.post('/login', function(req, res){
+    var id = req.body.id;
+    var password = req.body.password;
+    connectionPool.getConnection(function(err, conn){
+        conn.query("SELECT * FROM kisapay.user WHERE userid = ?",[id], function(err, result){
+            if(err){
+                throw err;
+            }
+            else {
+                var userData = result;
+                console.log(userData);
+                if(userData.userpassword == password){
+                    res.json(userData.accessToken);
+                }
+            }
+        })
+    })
+})
+
+app.get("/login", function(req, res){
+    res.render('login');
+})
 
 app.get('/user',function(req, res){
     var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
