@@ -218,17 +218,17 @@
 <script>
         var accessToken = localStorage.getItem('accessToken');
         var useseqnum = localStorage.getItem('useseqnum'); 
+
         $.ajax({ 
                 url : "/user",
                 type : "POST",
                 data : {
                     accessToken : accessToken,
                     userseqno : useseqnum
-                },
-                success : function(data){
-                    console.log(data);
-                    drawcard(data);
-                } 
+                }
+            }).done(function(data){
+                console.log(data);
+                drawcard(data);
             });                       
     function drawcard(data){
         console.log(data);

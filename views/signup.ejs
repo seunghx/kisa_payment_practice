@@ -279,7 +279,6 @@
         }).done(function(result){
             window.name ="parents";
             console.log(result.location);
-
             var tmpwindow = window.open("about:blank");
             tmpwindow.location = result.location;//추가
         })

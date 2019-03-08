@@ -209,10 +209,11 @@
                 id : username,
                 password : userpassword,
             },
-            dataType : "JSON",
             success : function(data){
+                console.log("login");
                 console.log(data);
-                localStorage.setItem("userAccesstoken", data);
+                localStorage.setItem("accessToken", data.accessToken);
+                localStorage.setItem("useseqnum", data.useseqnum);
             } 
         });                       
     }
