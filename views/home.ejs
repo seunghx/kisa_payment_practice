@@ -35,11 +35,8 @@
     </div>
     
     <div class="page-content header-clear-medium">   
-            
-                
-
         <div id="cardList">
-
+            
         </div>        
         <a href="https://enableds.com/support/" class="default-link button button-m shadow-huge button-round-large bottom-30 button-full button-margins bg-highlight">Enabled - Support Forum</a>
         
@@ -239,11 +236,7 @@
         for(var i= 0; i < list.length; i++){
             var element = list[i];
             $("#cardList").append(
-                + '<div class="content-boxed">'
-                + '<div class="content">'
-                + '<h1 class="bolder">'+element.account_alias+'</h1>'
-                + '</div>'    
-                +'</div>'
+                '<a href="" class="default-link button button-m shadow-huge button-round-large bottom-30 button-full button-margins bg-highlight">'+element.account_alias+'</a>'
             );
         }
     }
