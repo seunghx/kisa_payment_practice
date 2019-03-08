@@ -2,7 +2,6 @@ var express = require('express')
 var app = express();
 var request = require('request');
 var path = require('path');
-var mysql = require('mysql');
 var mysql      = require('mysql');
 var connectionPool = mysql.createPool({
   connectionLimit : 5,
@@ -52,10 +51,9 @@ app.post('/login', function(req, res){
             }
             else {
                 var userData = result;
-                console.log(userData);
-                if(userData.userpassword == password){
-                    res.json(userData.accessToken);
-                }
+                console.log("login");
+                conn.release();
+                res.json(userData.accessToken);
             }
         })
     })
@@ -65,9 +63,14 @@ app.get("/login", function(req, res){
     res.render('login');
 })
 
-app.get('/user',function(req, res){
-    var accessToken = "927abc9b-b9d6-4e77-a651-fd10ee83e134";
-    var requestURL = "https://testapi.open-platform.or.kr/user/me?user_seq_no=1100034736";
+app.get("/home", function(req, res){
+    res.render('home');
+})
+
+app.post('/user',function(req, res){
+    var accessToken = req.body.accessToken;
+    var user_seq_no = req.body.userseqno
+    var requestURL = "https://testapi.open-platform.or.kr/user/me?user_seq_no=" + user_seq_no;
     var option = {
         method : "GET",
         url : requestURL,
@@ -76,7 +79,8 @@ app.get('/user',function(req, res){
         }
     }
     request(option, function(err, response, body){
-        res.send(body);
+        obj = JSON.parse(body);
+        res.json(obj);
     })
 })
 
